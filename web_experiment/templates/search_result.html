@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>搜索结果</title>
+</head>
+<body>
+    <h1>{{ year }} 年的豆瓣电影：</h1>
+    {% if movies %}
+        <ul>
+            {% for movie in movies %}
+                <li>
+                    <strong>{{ movie.title }}</strong> - {{ movie.rating_num }}分 - {{ movie.comment_num }}人评价<br>
+                    导演：{{ movie.directors }}<br>
+                    主演：{{ movie.actors }}<br>
+                    国家：{{ movie.country }}<br>
+                    类型：{{ movie.category }}<br>
+                    <img src="{{ movie.pic }}" alt="{{ movie.title }}" width="100">
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>没有找到该年份的电影。</p>
+    {% endif %}
+    <p><a href="/search">返回搜索</a></p>
+    <p><a href="/">返回首页</a></p>
+</body>
+</html>
