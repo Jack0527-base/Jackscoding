@@ -2,28 +2,192 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>搜索结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ year }}年电影 - 豆瓣电影</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background-size: cover;
+        }
+
+        .navbar {
+            background-color: #fff;
+            width: 100%;
+            height: 60px;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #41ac52;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #41ac52;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 40px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 26px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .movie-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-title {
+            font-size: 17px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .movie-rating {
+            color: #ffac2d;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .movie-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 40px 0;
+        }
+
+        .action-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .action-link:hover {
+            color: #41ac52;
+        }
+
+        .action-link::before {
+            content: '';
+            margin-right: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ year }} 年的豆瓣电影：</h1>
-    {% if movies %}
-        <ul>
-            {% for movie in movies %}
-                <li>
-                    <strong>{{ movie.title }}</strong> - {{ movie.rating_num }}分 - {{ movie.comment_num }}人评价<br>
-                    导演：{{ movie.directors }}<br>
-                    主演：{{ movie.actors }}<br>
-                    国家：{{ movie.country }}<br>
-                    类型：{{ movie.category }}<br>
-                    <img src="{{ movie.pic }}" alt="{{ movie.title }}" width="100">
-                </li>
-                <hr>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>没有找到该年份的电影。</p>
-    {% endif %}
-    <p><a href="/search">返回搜索</a></p>
-    <p><a href="/">返回首页</a></p>
+    <nav class="navbar">
+        <a href="/" class="logo">豆瓣电影</a>
+        <div class="nav-links">
+            <a href="/">首页</a>
+            <a href="/search_movie">电影搜索</a>
+            <a href="#">影评</a>
+            <a href="#">排行榜</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>{{ year }}年的豆瓣电影</h1>
+        
+        {% if movies %}
+            <div class="movies-grid">
+                {% for movie in movies %}
+                    <div class="movie-card">
+                        <img class="movie-poster" src="{{ movie.pic }}" alt="{{ movie.title }}">
+                        <div class="movie-info">
+                            <div class="movie-title">{{ movie.title }}</div>
+                            <div class="movie-rating">★ {{ movie.rating_num }} 分 · {{ movie.comment_num }}人评价</div>
+                            <div class="movie-meta">导演：{{ movie.directors }}</div>
+                            <div class="movie-meta">主演：{{ movie.actors }}</div>
+                            <div class="movie-meta">国家：{{ movie.country }}</div>
+                            <div class="movie-meta">类型：{{ movie.category }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <p>没有找到{{ year }}年的电影记录</p>
+            </div>
+        {% endif %}
+
+        <div class="action-links">
+            <a href="/search" class="action-link">返回搜索</a>
+            <a href="/" class="action-link">返回首页</a>
+        </div>
+    </div>
 </body>
 </html>

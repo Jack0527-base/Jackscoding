@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录 - 豆瓣电影</title>
+    <title>注册 - 豆瓣电影</title>
     <style>
         * {
             margin: 0;
@@ -11,7 +11,6 @@
             box-sizing: border-box;
             font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
         }
-
         body {
             min-height: 100vh;
             display: flex;
@@ -21,8 +20,7 @@
             background-size: cover;
             position: relative;
         }
-
-        .login-container {
+        .register-container {
             background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 10px;
@@ -30,31 +28,24 @@
             width: 100%;
             max-width: 400px;
             margin: 20px;
-        }
-
-        .login-header {
             text-align: center;
-            margin-bottom: 30px;
         }
-
-        .login-header h1 {
+        .register-header {
             font-size: 24px;
-            color: #333;
-            font-weight: normal;
-            margin-bottom: 10px;
-        }
-
-        .form-group {
+            color: #4b6cb7;
+            font-weight: bold;
             margin-bottom: 20px;
         }
-
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
         .form-group label {
             display: block;
             margin-bottom: 8px;
             color: #666;
             font-size: 14px;
         }
-
         .form-group input {
             width: 100%;
             padding: 12px 15px;
@@ -63,20 +54,17 @@
             font-size: 14px;
             transition: all 0.3s ease;
         }
-
         .form-group input:focus {
             outline: none;
             border-color: #4b6cb7;
             box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.1);
         }
-
         .error-message {
             color: #ff4055;
             font-size: 14px;
             margin-top: 5px;
             text-align: center;
         }
-
         .submit-btn {
             width: 100%;
             padding: 12px;
@@ -88,11 +76,9 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .submit-btn:hover {
             background-color: #3b5998;
         }
-
         .back-link {
             display: block;
             text-align: center;
@@ -101,35 +87,15 @@
             text-decoration: none;
             font-size: 14px;
         }
-
         .back-link:hover {
             color: #4b6cb7;
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .register-link a {
-            color: #4b6cb7;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>登录</h1>
-        </div>
-        <form action="/signin" method="post">
+    <div class="register-container">
+        <div class="register-header">注册新用户</div>
+        <form action="/register" method="post">
             <div class="form-group">
                 <label for="username">用户名</label>
                 <input type="text" id="username" name="username" value="{{ username or '' }}" placeholder="请输入用户名">
@@ -138,15 +104,16 @@
                 <label for="password">密码</label>
                 <input type="password" id="password" name="password" placeholder="请输入密码">
             </div>
+            <div class="form-group">
+                <label for="confirm_password">确认密码</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="请再次输入密码">
+            </div>
             {% if message %}
             <div class="error-message">{{ message }}</div>
             {% endif %}
-            <button type="submit" class="submit-btn">登录</button>
-            <div class="register-link">
-                <a href="/register">还没有账号？立即注册</a>
-            </div>
+            <button type="submit" class="submit-btn">注册</button>
             <a href="/" class="back-link">返回首页</a>
         </form>
     </div>
 </body>
-</html>
+</html> 

@@ -2,11 +2,97 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>登录成功</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录成功 - 豆瓣电影</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background-size: cover;
+            position: relative;
+        }
+
+        .success-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: #41ac52;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .action-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-link {
+            display: block;
+            padding: 12px 20px;
+            background-color: #4b6cb7;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-link:hover {
+            background-color: #3b5998;
+        }
+
+        .action-link.secondary {
+            background-color: transparent;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .action-link.secondary:hover {
+            background-color: #f5f5f5;
+            border-color: #999;
+        }
+
+        .username {
+            color: #4b6cb7;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>你好，{{ username }}，登录成功！</h1>
-    <p><a href="/search">点击这里进入电影搜索页面</a></p>
-    <p><a href="/">返回首页</a></p>
+    <div class="success-container">
+        <div class="success-icon">✓</div>
+        <h1>你好，<span class="username">{{ username }}</span></h1>
+        <p>登录成功！</p>
+        <div class="action-links">
+            <a href="/search" class="action-link">进入电影搜索页面</a>
+            <a href="/" class="action-link secondary">返回首页</a>
+        </div>
+    </div>
 </body>
 </html>

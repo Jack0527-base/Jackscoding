@@ -2,12 +2,170 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豆瓣电影 - 首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background-size: cover;
+            position: relative;
+        }
+
+        .home-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: #41ac52;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #666;
+            font-weight: normal;
+            margin: 20px 0 40px;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #4b6cb7;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: block;
+            padding: 14px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4b6cb7;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3b5998;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid #4b6cb7;
+            color: #4b6cb7;
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: #4b6cb7;
+            color: white;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .footer a {
+            color: #4b6cb7;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>欢迎使用豆瓣电影搜索系统</h1>
-    <ul>
-        <li><a href="/signin">登录系统</a></li>
-    </ul>
+    <div class="home-container">
+        <div class="logo">豆瓣电影</div>
+        <h1>发现和分享你喜爱的电影</h1>
+
+        <div class="feature-list">
+            <div class="feature-item">
+                <div class="feature-icon">🎬</div>
+                <div class="feature-title">海量电影资源</div>
+                <div class="feature-desc">覆盖全球各地优秀影片，随时探索新的电影世界</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-title">智能搜索</div>
+                <div class="feature-desc">快速找到你想看的电影，支持多维度筛选</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💬</div>
+                <div class="feature-title">用户评价</div>
+                <div class="feature-desc">真实用户评分和评论，帮你做出更好的选择</div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/signin" class="btn btn-primary">登录</a>
+            <a href="/register" class="btn btn-outline">注册新用户</a>
+        </div>
+
+        <div class="footer">
+            <p>遇到问题？<a href="#">联系我们</a> | <a href="#">使用帮助</a></p>
+        </div>
+    </div>
 </body>
 </html>

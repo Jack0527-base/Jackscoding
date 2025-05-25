@@ -1,6 +1,7 @@
-import re
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, request, session, redirect, url_for, render_template, jsonify
 from peewee import MySQLDatabase, Model, CharField, FloatField, IntegerField, AutoField
+from flasgger import Swagger
+import re
 
 # 配置数据库
 db = MySQLDatabase(
@@ -12,7 +13,7 @@ db = MySQLDatabase(
     charset='utf8mb4'
 )
 
-# 定义 Peewee 模型
+# 定义模型
 class Movie(Model):
     id = AutoField()
     title = CharField()
@@ -29,23 +30,45 @@ class Movie(Model):
         database = db
         table_name = 'douban_movie'
 
-# 初始化 Flask 应用
+# 初始化应用
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # 必须设置 session 密钥
+app.secret_key = 'your_secret_key'
+
+# 配置 Swagger，设置访问地址为 /apidocs/
+swagger = Swagger(app, config={
+    "swagger_ui": True,
+    "specs_route": "/apidocs/"
+})
 
 # 首页
 @app.route('/')
 def home():
     return render_template('home.html')
 
-# 登录页面（GET）
+# 登录页面
 @app.route('/signin', methods=['GET'])
 def signin_form():
     return render_template('form.html')
 
-# 登录处理（POST）
+# 登录
 @app.route('/signin', methods=['POST'])
 def signin():
+    """
+    用户登录
+    ---
+    parameters:
+      - name: username
+        in: formData
+        type: string
+        required: true
+      - name: password
+        in: formData
+        type: string
+        required: true
+    responses:
+      200:
+        description: 登录成功或失败页面
+    """
     username = request.form.get('username')
     password = request.form.get('password')
 
@@ -62,12 +85,32 @@ def signin():
 # 退出登录
 @app.route('/logout')
 def logout():
+    """
+    退出登录
+    ---
+    responses:
+      302:
+        description: 成功后跳转到首页
+    """
     session.clear()
     return redirect(url_for('home'))
 
-# 搜索页面（登录后可访问）
+# 搜索页面
 @app.route('/search', methods=['GET', 'POST'])
 def search_movie():
+    """
+    按年份搜索电影
+    ---
+    parameters:
+      - name: year
+        in: formData
+        type: string
+        required: true
+        description: 年份，4位数字
+    responses:
+      200:
+        description: 返回符合年份的电影
+    """
     if not session.get('logged_in'):
         return redirect(url_for('signin_form'))
 
@@ -81,23 +124,7 @@ def search_movie():
 
     return render_template('search_movie.html')
 
-# 注册页面（GET & POST）
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-    username = request.form.get('username')
-    password = request.form.get('password')
-    confirm_password = request.form.get('confirm_password')
-    if not username or not password or not confirm_password:
-        return render_template('register.html', message='所有字段均为必填', username=username or '')
-    if password != confirm_password:
-        return render_template('register.html', message='两次输入的密码不一致', username=username or '')
-    # 这里可以添加用户名是否已存在的判断和数据库写入逻辑
-    # 本示例仅跳转到登录页
-    return redirect(url_for('signin_form'))
-
-# 启动应用
+# 启动
 if __name__ == '__main__':
     db.connect()
     app.run(debug=True)
