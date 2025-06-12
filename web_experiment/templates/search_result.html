@@ -35,22 +35,42 @@
             font-size: 24px;
             font-weight: bold;
             text-decoration: none;
-            margin-right: 20px;
+            margin-right: 30px;
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 30px;
+            margin-left: auto;
         }
 
         .nav-links a {
             color: #666;
             text-decoration: none;
             font-size: 15px;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
             color: #41ac52;
+        }
+
+        .user-info {
+            margin-left: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-info a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .user-info a:hover {
+            color: #4b6cb7;
         }
 
         .container {
@@ -61,9 +81,15 @@
 
         h1 {
             color: #fff;
-            font-size: 26px;
+            font-size: 28px;
             margin: 20px 0;
             font-weight: bold;
+        }
+
+        .result-summary {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
         .movies-grid {
@@ -153,9 +179,13 @@
         <a href="/" class="logo">豆瓣电影</a>
         <div class="nav-links">
             <a href="/">首页</a>
-            <a href="/search_movie">电影搜索</a>
+            <a href="/search">电影搜索</a>
             <a href="#">影评</a>
             <a href="#">排行榜</a>
+        </div>
+        <div class="user-info">
+            <span>欢迎，{{ session.username or '游客' }}</span>
+            <a href="/logout">退出</a>
         </div>
     </nav>
 
@@ -163,6 +193,7 @@
         <h1>{{ year }}年的豆瓣电影</h1>
         
         {% if movies %}
+            <div class="result-summary">找到 {{ count or movies|length }} 部电影</div>
             <div class="movies-grid">
                 {% for movie in movies %}
                     <div class="movie-card">

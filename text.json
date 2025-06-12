@@ -1,9 +1,0 @@
-{
-    "device_id": "CAM_00123",
-    "timestamp": "2025-05-07T14:23:45Z",
-    "plate_number": "ABC1234",
-    "confidence": 0.98,
-    "image_url": "https://oss.example.com/images/20250507/IMG_0001.jpg",
-    "event_type": "entry"
-  }
-

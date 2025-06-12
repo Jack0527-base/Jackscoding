@@ -1,0 +1,24 @@
+# Web框架
+Flask==2.3.3
+
+# 数据库ORM
+peewee==3.16.3
+
+# MySQL数据库驱动
+PyMySQL==1.1.0
+
+# 网页解析
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# HTTP请求
+requests==2.31.0
+
+# API文档生成
+flasgger==0.9.7.1
+
+# 数据处理
+pandas==2.1.1
+
+# 开发工具
+python-dotenv==1.0.0 

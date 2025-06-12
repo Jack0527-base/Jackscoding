@@ -24,28 +24,36 @@
 
         .login-container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             margin: 20px;
+            text-align: center;
         }
 
         .login-header {
-            text-align: center;
             margin-bottom: 30px;
         }
 
+        .logo {
+            font-size: 32px;
+            color: #41ac52;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
         .login-header h1 {
-            font-size: 24px;
-            color: #333;
+            font-size: 20px;
+            color: #666;
             font-weight: normal;
             margin-bottom: 10px;
         }
 
         .form-group {
             margin-bottom: 20px;
+            text-align: left;
         }
 
         .form-group label {
@@ -75,6 +83,18 @@
             font-size: 14px;
             margin-top: 5px;
             text-align: center;
+        }
+        
+        .success-message {
+            color: #28a745;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
         }
 
         .submit-btn {
@@ -127,7 +147,8 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <h1>登录</h1>
+            <div class="logo">豆瓣电影</div>
+            <h1>登录你的账户</h1>
         </div>
         <form action="/signin" method="post">
             <div class="form-group">
@@ -139,7 +160,11 @@
                 <input type="password" id="password" name="password" placeholder="请输入密码">
             </div>
             {% if message %}
-            <div class="error-message">{{ message }}</div>
+                {% if message_type == 'success' %}
+                    <div class="success-message">{{ message }}</div>
+                {% else %}
+                    <div class="error-message">{{ message }}</div>
+                {% endif %}
             {% endif %}
             <button type="submit" class="submit-btn">登录</button>
             <div class="register-link">
